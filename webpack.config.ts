@@ -47,11 +47,11 @@ const config: Configuration = {
             '@babel/preset-react',
             '@babel/preset-typescript',
           ],
-          env: {
-            development: {
-              plugins: [require.resolve('react-refresh/babel')],
-            },
-          },
+          // env: {
+          //   development: {
+          //     plugins: [require.resolve('react-refresh/babel')],
+          //   },
+          // },
         },
         exclude: path.join(__dirname, 'node_modules'),
       },
