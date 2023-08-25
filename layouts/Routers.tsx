@@ -1,7 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import React from "react";
-import SignUp from "@pages/SignUp";
-import LogIn from "@pages/LogIn";
+import loadable from '@loadable/component';
+
+const SignUp = loadable(()=>import("@pages/SignUp"));
+const LogIn = loadable(()=>import("@pages/LogIn"));
 
 const Routers = createBrowserRouter([
     {

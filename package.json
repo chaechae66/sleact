@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/preset-env": "^7.22.10",
+    "@loadable/component": "^5.15.3",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
@@ -30,6 +31,7 @@
     "@babel/core": "^7.22.10",
     "@babel/preset-react": "^7.22.5",
     "@babel/preset-typescript": "^7.22.5",
+    "@types/loadable__component": "^5.13.4",
     "@types/node": "^20.5.3",
     "@types/webpack": "^5.28.2",
     "@types/webpack-dev-server": "^4.7.2",
