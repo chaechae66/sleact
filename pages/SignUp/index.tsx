@@ -1,32 +1,24 @@
 import React, { ChangeEvent, useCallback, useState } from 'react';
 import { Success, Form, Error, Label, Input, LinkContainer, Button, Header } from './style';
 import { Link } from 'react-router-dom';
+import useInput from '../../hooks/useInput';
 
 const SignUp = () => {
-  const [email, setEmail] = useState('');
-  const [nickname, setNickname] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordCheck, setPasswordCheck] = useState('');
+  const [email, onChangeEmail ,setEmail] = useInput('');
+  const [nickname, onChangeNickname ,setNickname] = useInput('');
+  const [password, , setPassword] = useInput('');
+  const [passwordCheck, , setPasswordCheck] = useInput('');
   const [mismatchError, setMismatchError] = useState(false);
   const [signUpError, setSignUpError] = useState('');
   const [signUpSuccess, setSignUpSuccess] = useState(false);
 
-  const onChangeEmail = useCallback((e:ChangeEvent)=>{
-    setEmail((e.target as HTMLInputElement).value);
-  },[]);
-  const onChangeNickname = useCallback((e:ChangeEvent)=>{
-    setNickname((e.target as HTMLInputElement).value);
-  },[]);
-
   const onChangePassword = useCallback((e:ChangeEvent) => {
-    setPassword((e.target as HTMLInputElement).value);
     setMismatchError((e.target as HTMLInputElement).value !== passwordCheck);
-    },[passwordCheck]);
+  },[passwordCheck]);
 
   const onChangePasswordCheck = useCallback((e:ChangeEvent) => {
-    setPasswordCheck((e.target as HTMLInputElement).value)
     setMismatchError((e.target as HTMLInputElement).value !== password);
-    },[password]);
+  },[password]);
 
   const onSubmit = useCallback((e:React.FormEvent) => {
     e.preventDefault();
