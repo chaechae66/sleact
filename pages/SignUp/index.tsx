@@ -2,31 +2,52 @@ import React, { ChangeEvent, useCallback, useState } from 'react';
 import { Success, Form, Error, Label, Input, LinkContainer, Button, Header } from './style';
 import { Link } from 'react-router-dom';
 import useInput from '../../hooks/useInput';
+import axios from 'axios';
 
 const SignUp = () => {
-  const [email, onChangeEmail ,setEmail] = useInput('');
-  const [nickname, onChangeNickname ,setNickname] = useInput('');
+  const [email, onChangeEmail, setEmail] = useInput('');
+  const [nickname, onChangeNickname, setNickname] = useInput('');
   const [password, , setPassword] = useInput('');
   const [passwordCheck, , setPasswordCheck] = useInput('');
   const [mismatchError, setMismatchError] = useState(false);
   const [signUpError, setSignUpError] = useState('');
   const [signUpSuccess, setSignUpSuccess] = useState(false);
 
-  const onChangePassword = useCallback((e:ChangeEvent) => {
-    setMismatchError((e.target as HTMLInputElement).value !== passwordCheck);
-  },[passwordCheck]);
+  const onChangePassword = useCallback(
+    (e: ChangeEvent) => {
+      setPassword((e.target as HTMLInputElement).value);
+      setMismatchError((e.target as HTMLInputElement).value !== passwordCheck);
+    },
+    [passwordCheck],
+  );
 
-  const onChangePasswordCheck = useCallback((e:ChangeEvent) => {
-    setMismatchError((e.target as HTMLInputElement).value !== password);
-  },[password]);
+  const onChangePasswordCheck = useCallback(
+    (e: ChangeEvent) => {
+      setPasswordCheck((e.target as HTMLInputElement).value);
+      setMismatchError((e.target as HTMLInputElement).value !== password);
+    },
+    [password],
+  );
 
-  const onSubmit = useCallback((e:React.FormEvent) => {
-    e.preventDefault();
-    console.log(email,nickname,password,passwordCheck);
-    if(!mismatchError && nickname){
-      console.log('서버로 회원가입');
-    }
-  },[email,nickname,password,passwordCheck,mismatchError]);
+  const onSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      if (!mismatchError && nickname) {
+        axios
+          .post('/api/users', {
+            email,
+            nickname,
+            password,
+          })
+          .then(() => {})
+          .catch((err) => {
+            console.log(err.response);
+          })
+          .finally(() => {});
+      }
+    },
+    [email, nickname, password, passwordCheck, mismatchError],
+  );
 
   return (
     <div id="container">
