@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useCallback, useState } from 'react';
-import { Success, Form, Error, Label, Input, LinkContainer, Button, Header } from './style';
+import { Success, Form, Error, Label, Input, LinkContainer, Button, Header } from './styles';
 import { Link } from 'react-router-dom';
 import useInput from '../../hooks/useInput';
 import axios from 'axios';
