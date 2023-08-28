@@ -33,15 +33,19 @@ const SignUp = () => {
     (e: React.FormEvent) => {
       e.preventDefault();
       if (!mismatchError && nickname) {
+        setSignUpError('');
+        setSignUpSuccess(false);
         axios
           .post('/api/users', {
             email,
             nickname,
             password,
           })
-          .then(() => {})
+          .then(() => {
+            setSignUpSuccess(true);
+          })
           .catch((err) => {
-            console.log(err.response);
+            setSignUpError(err.response.data);
           })
           .finally(() => {});
       }
