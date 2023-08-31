@@ -2,11 +2,12 @@ import useInput from '@hooks/useInput';
 import { Button, Error, Form, Header, Input, Label, LinkContainer } from '@pages/SignUp/styles';
 import fetcher from '@utils/fetcher';
 import axios from 'axios';
-import React, { useCallback, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 
 const LogIn = () => {
+  const navigate = useNavigate();
   const { data, error, mutate } = useSWR('http://localhost:3095/api/users', fetcher, {
     dedupingInterval: 100000,
   });
@@ -35,6 +36,12 @@ const LogIn = () => {
     },
     [email, password],
   );
+
+  useEffect(() => {
+    if (data) {
+      return navigate('/workspace/channel');
+    }
+  }, [data]);
 
   // console.log(error, userData);
   // if (!error && userData) {
