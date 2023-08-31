@@ -19,7 +19,7 @@ const Workspace: FC<Props> = ({ children }) => {
         withCredentials: true,
       })
       .then(() => {
-        mutate();
+        mutate(false, false);
       });
   }, []);
 
