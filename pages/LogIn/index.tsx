@@ -8,9 +8,7 @@ import useSWR from 'swr';
 
 const LogIn = () => {
   const navigate = useNavigate();
-  const { data, error, mutate } = useSWR('http://localhost:3095/api/users', fetcher, {
-    dedupingInterval: 100000,
-  });
+  const { data, error, mutate } = useSWR('/api/users', fetcher);
   const [logInError, setLogInError] = useState(false);
   const [email, onChangeEmail] = useInput('');
   const [password, onChangePassword] = useInput('');
@@ -36,8 +34,6 @@ const LogIn = () => {
     },
     [email, password],
   );
-
-  console.log('data', data);
 
   useEffect(() => {
     if (data) {

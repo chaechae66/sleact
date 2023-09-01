@@ -22,7 +22,7 @@ type Props = {
 
 const Workspace: FC<Props> = ({ children }) => {
   const navigate = useNavigate();
-  const { data, error, isValidating, mutate } = useSWR('http://localhost:3095/api/users');
+  const { data, error, mutate } = useSWR('/api/users', fetcher);
   const onLogout = useCallback(() => {
     axios
       .post('/api/users/logout', null, {
@@ -32,8 +32,6 @@ const Workspace: FC<Props> = ({ children }) => {
         mutate(false, false);
       });
   }, []);
-
-  console.log('data2', data);
 
   useEffect(() => {
     if (!data) {
@@ -46,7 +44,7 @@ const Workspace: FC<Props> = ({ children }) => {
       <Header>
         <RightMenu>
           <span>
-            <ProfileImg src={gravatar.url(data.email, { s: '28px', d: 'retro' })} alt={data.email} />
+            <ProfileImg src={gravatar.url(data?.email, { s: '28px', d: 'retro' })} alt={data?.email} />
           </span>
         </RightMenu>
       </Header>
