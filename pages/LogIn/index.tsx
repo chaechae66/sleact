@@ -37,6 +37,8 @@ const LogIn = () => {
     [email, password],
   );
 
+  console.log('data', data);
+
   useEffect(() => {
     if (data) {
       return navigate('/workspace/channel');
