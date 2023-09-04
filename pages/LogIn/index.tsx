@@ -2,8 +2,8 @@ import useInput from '@hooks/useInput';
 import { Button, Error, Form, Header, Input, Label, LinkContainer } from '@pages/SignUp/styles';
 import fetcher from '@utils/fetcher';
 import axios from 'axios';
-import React, { useCallback, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useCallback, useState } from 'react';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 
 const LogIn = () => {
@@ -35,11 +35,9 @@ const LogIn = () => {
     [email, password],
   );
 
-  useEffect(() => {
-    if (data) {
-      return navigate('/workspace/channel');
-    }
-  }, [data]);
+  if (data) {
+    return <Navigate to="/workspace/channel" replace={true} />;
+  }
 
   // console.log(error, userData);
   // if (!error && userData) {
